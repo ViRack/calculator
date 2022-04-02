@@ -72,6 +72,7 @@ main {
     grid-template-columns: repeat(1, 1fr);
     border: 1px solid black;
     background-color: #F4FFF8;
+    height: 10rem;
 }
 
 .expression {

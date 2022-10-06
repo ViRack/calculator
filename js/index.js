@@ -136,6 +136,8 @@ for (let i = 0; i < functionButtons.length; i++) {
             }
 
             if (statement.length <= 1) {
+                updateCurrentOutput(" ");
+                currentValue = "";
                 return null;
             }
 

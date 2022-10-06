@@ -10,14 +10,17 @@
 
 const numberpadButtons  = document.getElementsByClassName("numpad-item");
 const functionButtons   = document.getElementsByClassName("function-item");
+const acButton          = document.getElementsByClassName("function-ac");
+const delButton         = document.getElementsByClassName("function-del");
+
 
 let statement = [];
 
 let currentValue = "";
-let secondValue = "";
 let evaluation = "";
 
-let output = "";
+let statementOutput = document.querySelector(".expression-container");
+let currentOutput   = document.querySelector(".value-container");
 
 let Calculator = {
     
@@ -61,6 +64,20 @@ let Calculator = {
 
 }
 
+function updateExpression() {
+    console.log("in updateExpression");
+    statementOutput.textContent = statement.join(' ');
+}
+
+function updateCurrentOutput() {
+    console.log("in updateCurrentOutput");
+    currentOutput.textContent = currentOutput;
+}
+
+function updateCurrentOutput(value) {
+    console.log ("in updateCurrentOutput with value as argument");
+    currentOutput.textContent = value;
+}
 
 function isEquals(value) {
     if (value === "=") {
@@ -80,21 +97,24 @@ function validDividend() {
     return true;
 }
 
+
+delButton[0].addEventListener("click", function() {
+    currentValue = currentValue.slice(0, -1);
+    updateCurrentOutput(currentValue);
+    console.log(currentValue);
+    // fix output here
+})
+
+acButton[0].addEventListener("click", function () {
+        Calculator.clear();
+        currentValue = "";
+        updateCurrentOutput();
+        updateExpression();
+})
+
 // Set up function buttons
 for (let i = 0; i < functionButtons.length; i++) {
     functionButtons[i].addEventListener("click", function() {
-
-        if (functionButtons.textContent = "AC") {
-            Calculator.clear();
-            currentValue = "";
-            output = "";
-            return null;
-        }
-        if (functionButtons. textContent = "Del") {
-            --currentValue;
-            // fix output here
-        }
-
 
 
         console.log("clicked a function");
@@ -104,7 +124,17 @@ for (let i = 0; i < functionButtons.length; i++) {
             return null;
         }
 
-        if (isEquals(functionButtons[i].textContent) && validDividend()) {
+        if (isEquals(functionButtons[i].textContent)) {
+
+            if (!validDividend()) {
+                Calculator.clear();
+                currentValue = "";
+                evaluation = "";
+                updateCurrentOutput("ERROR: Cannot divide by 0");
+                updateExpression();
+                return null;
+            }
+
             if (statement.length <= 1) {
                 return null;
             }
@@ -114,8 +144,10 @@ for (let i = 0; i < functionButtons.length; i++) {
             Calculator.clear();
             
             statement.push(Number.parseFloat(evaluation));
+            updateExpression();
 
             currentValue = "";
+            updateCurrentOutput();
             console.log("evaluation: ", statement);
             return null;
         }
@@ -132,15 +164,19 @@ for (let i = 0; i < functionButtons.length; i++) {
                 statement.push(Number.parseFloat(evaluation));
                 statement.push(functionButtons[i].textContent);
                 
+                updateExpression();
                 currentValue = "";
+                updateCurrentOutput();
                 console.log("evaluation: ", statement);
             }
             else {
                 console.log(statement);
                 statement.push(Number.parseFloat(currentValue));
                 currentValue = "";
-                
+                updateCurrentOutput();
+
                 statement.push(functionButtons[i].textContent);
+                updateExpression();
                 console.log(statement);
             }
         }
@@ -148,9 +184,11 @@ for (let i = 0; i < functionButtons.length; i++) {
             console.log("changing function type: ", statement);
             statement.pop();
             statement.push(functionButtons[i].textContent);
+            updateExpression();
         }
         else if(statement.length > 0) {
             statement.push(functionButtons[i].textContent);
+            updateExpression();
             console.log(statement);
         }
 
@@ -165,6 +203,7 @@ for (let i = 0; i < numberpadButtons.length; i++) {
 
         if (Number.isInteger(Number.parseFloat(numberpadButtons[i].textContent.toString()))) {
             currentValue = currentValue + numberpadButtons[i].textContent.toString();
+            updateCurrentOutput(currentValue);
             console.log("current value: ", currentValue);
         }   
         // else {

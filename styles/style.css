@@ -1,0 +1,147 @@
+@import 'meyer-reset.css';
+
+/* total */
+
+HTML {
+    height: 100%;
+    width: 100vw;
+    border: 1px solid black;
+
+}
+
+body {
+    height: 100%;
+}
+
+/* Header */
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: none;
+    padding: 10px;
+    background-color: #658E9C;
+}
+
+header a, footer a {
+    text-decoration: none;
+    color: #000F08;
+}
+
+
+/* Main */
+
+main {
+    display: flex;
+    height: 100%;
+    min-height: 900px;
+    background-color: #F4FFF8;
+    border: 1px solid black;
+    justify-content: center;
+}
+
+/* Calculator */
+
+.calc-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 10px;
+    min-height: 50rem;
+    max-height: 50rem;
+    width: 30rem;
+    justify-content: center;
+    align-self: center;
+    height: 80%;
+    background-color: #4D5382;
+    padding: 20px;
+    border-radius: 5%;
+    box-shadow: 15px 10px 20px #1d2c35;
+    border-bottom: 1px solid #000F08;
+    border-right: 1px solid #000F08;
+}
+
+/* Display start ------------------------- */
+
+.display {
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    border: 1px solid black;
+    background-color: #F4FFF8;
+    height: 10rem;
+}
+
+.expression {
+    grid-row: 1;
+    text-align: right;
+}
+
+.value {
+    grid-row: 2;
+    text-align: right;
+}
+
+/* Display end --------------------------- */
+
+/* Functions start ----------------------- */
+
+.function-container {
+    grid-column: 2/2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 10px;
+}
+
+.function-item {
+    border: .1rem solid #000F08;
+    padding: 20px;
+    margin: 1rem;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 1rem;
+}
+
+/* Function end -------------------------- */
+
+/* Numpad  Start ------------------------- */
+
+.numpad-container {
+    grid-column: 1/2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);    
+    padding: 10px;
+}
+
+.numpad-item {
+    border: .1rem solid #000F08;
+    padding: 20px;
+    margin: 1rem;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 1rem;
+    min-width: 5.5rem;
+    max-width: 10rem;
+}
+
+
+
+/* Numpad end --------------------------- */
+
+/* Footer */
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: none;
+    padding: 10px;
+    background-color: #658E9C;
+
+}
